@@ -7,6 +7,7 @@ import Productos from "./views/Productos";
 import Categorias from "./views/Categorias";
 import Clientes from "./views/Clientes";
 import Ventas from "./views/Ventas";
+import Compras from "./views/Compras";
 import Empleados from "./views/Empleados";
 import './App.css';
 
@@ -25,6 +26,8 @@ const App = () => {
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/clientes" element={<Clientes />} />
         <Route path="/ventas" element={<Ventas />} />
+        <Route path="/compra" element={<Compras />} />
+
         <Route path="/empleados" element={<Empleados />} />
 
         </Routes>

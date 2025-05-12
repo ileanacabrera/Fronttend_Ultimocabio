@@ -22,7 +22,7 @@ const Clientes = () => {
 
   const obtenerClientes = async () => {
     try {
-      const respuesta = await fetch('http://localhost:3000/api/clientes');
+      const respuesta = await fetch('http://localhost:2000/api/clientes');
       if (!respuesta.ok) {
         throw new Error('Error al cargar los clientes');
       }
@@ -61,7 +61,7 @@ const Clientes = () => {
     }
 
     try {
-      const respuesta = await fetch('http://localhost:3000/api/registrarclientes', {
+      const respuesta = await fetch('http://localhost:2000/api/registrarclientes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

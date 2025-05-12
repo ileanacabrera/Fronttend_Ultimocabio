@@ -26,7 +26,7 @@ const Categorias = () => {
 
   const obtenerCategorias = async () => {
     try {
-      const respuesta = await fetch('http://localhost:3000/api/categorias');
+      const respuesta = await fetch('http://localhost:2000/api/categorias');
       if (!respuesta.ok) {
         throw new Error('Error al cargar las categorías');
       }
@@ -62,7 +62,7 @@ const Categorias = () => {
     }
 
     try {
-      const respuesta = await fetch('http://localhost:3000/api/registrarcategoria', {
+      const respuesta = await fetch('http://localhost:2000/api/registrarcategoria', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const Categorias = () => {
     if (!categoriaAEliminar) return;
   
     try {
-      const respuesta = await fetch(`http://localhost:3000/api/eliminarcategoria/${categoriaAEliminar.id_categoria}`, {
+      const respuesta = await fetch(`http://localhost:2000/api/eliminarcategoria/${categoriaAEliminar.id_categoria}`, {
         method: 'DELETE',
       });
   
@@ -124,7 +124,7 @@ const Categorias = () => {
     }
 
     try {
-      const respuesta = await fetch(`http://localhost:3000/api/actualizarcategoria/${categoriaEditada.id_categoria}`, {
+      const respuesta = await fetch(`http://localhost:2000/api/actualizarcategoria/${categoriaEditada.id_categoria}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

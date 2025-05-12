@@ -22,7 +22,7 @@ const Empleados = () => {
 
   const obtenerEmpleados = async () => {
     try {
-      const respuesta = await fetch('http://localhost:3000/api/empleados');
+      const respuesta = await fetch('http://localhost:2000/api/empleados');
       if (!respuesta.ok) {
         throw new Error('Error al cargar los clientes');
       }
@@ -60,7 +60,7 @@ const Empleados = () => {
     }
 
     try {
-      const respuesta = await fetch('http://localhost:3000/api/registrarempleado', {
+      const respuesta = await fetch('http://localhost:2000/api/registrarempleado', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
