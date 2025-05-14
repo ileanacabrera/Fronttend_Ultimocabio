@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TablaProductos from '../components/producto/TablaProductos'; // Asumiendo que tienes este componente
-import ModalRegistroProducto from '../components/producto/ModalRegistrarProductos'; // Asumiendo que tienes este componente
+import ModalRegistroProducto from '../components/producto/ModalRegistroProducto'; // Asumiendo que tienes este componente
 import { Container, Button } from "react-bootstrap";
+import ModalEliminacionProducto from '../components/producto/ModalEliminacionProducto';
 
 const Productos = () => {
   const [listaProductos, setListaProductos] = useState([]);
@@ -17,34 +18,28 @@ const Productos = () => {
     stock: '',
     imagen: ''
   });
+  const [mostrarModalEliminacion, setMostrarModalEliminacion] = useState(false);
+  const [productoAEliminar, setProductoAEliminar] = useState(null);
 
-
- // Obtener productos
- const obtenerProductos = async () => {
-  try {
-    const respuesta = await fetch('http://localhost:2000/api/productos');
-    if (!respuesta.ok) throw new Error('Error al cargar los productos');
-    const datos = await respuesta.json();
-    setListaProductos(datos);
-    setCargando(false);
-  } catch (error) {
-    setErrorCarga(error.message);
-    setCargando(false);
-  }
-};
-
-
-useEffect(() => {
-  obtenerProductos();
-}, []);
-
-
+  // Obtener productos
+  const obtenerProductos = async () => {
+    try {
+      const respuesta = await fetch('http://localhost:3000/api/productos');
+      if (!respuesta.ok) throw new Error('Error al cargar los productos');
+      const datos = await respuesta.json();
+      setListaProductos(datos);
+      setCargando(false);
+    } catch (error) {
+      setErrorCarga(error.message);
+      setCargando(false);
+    }
+  };
 
   // Obtener categorías para el dropdown
   const obtenerCategorias = async () => {
     try {
-      const respuesta = await fetch('http://localhost:2000/api/categorias');
-      if (!respuesta.ok) throw new Error('Error al cargar los categorias');
+      const respuesta = await fetch('http://localhost:3000/api/categoria');
+      if (!respuesta.ok) throw new Error('Error al cargar las categorías');
       const datos = await respuesta.json();
       setListaCategorias(datos);
     } catch (error) {
@@ -65,6 +60,49 @@ useEffect(() => {
     }));
   };
 
+  const manejarCambioInputEdicion = (e) => {
+    const { name, value } = e.target;
+    setCategoriaEditada(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  
+  const eliminarProducto = async () => {
+    if (!productoAEliminar) return;
+
+    try {
+      const respuesta = await fetch(`http://localhost:3000/api/eliminarproducto/${productoAEliminar.id_producto}`, {
+        method: 'DELETE',
+      });
+
+      if (!respuesta.ok) {
+        throw new Error('Error al eliminar el producto');
+      }
+
+      await obtenerProductos(); // Refresca la lista
+      setMostrarModalEliminacion(false);
+      establecerPaginaActual(1); // Regresa a la primera página
+      setProductoAEliminar(null);
+      setErrorCarga(null);
+    } catch (error) {
+      setErrorCarga(error.message);
+    }
+  };
+
+  const abrirModalEliminacion = (producto) => {
+    setProductoAEliminar(producto);
+    setProductoAEliminar(true);
+  };
+
+  
+  const abrirModalEdicion = (producto) => {
+    setEditada(producto);
+    setMostrarModalEdicion(true);
+  };
+
+
   const agregarProducto = async () => {
     if (!nuevoProducto.nombre_producto || !nuevoProducto.id_categoria || 
         !nuevoProducto.precio_unitario || !nuevoProducto.stock) {
@@ -73,7 +111,7 @@ useEffect(() => {
     }
 
     try {
-      const respuesta = await fetch('http://localhost:2000/api/registrarproducto', {
+      const respuesta = await fetch('http://localhost:3000/api/registrarproducto', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,8 +137,6 @@ useEffect(() => {
     }
   };
 
-
-
   return (
     <Container className="mt-5">
       <br />
@@ -114,6 +150,7 @@ useEffect(() => {
         productos={listaProductos} 
         cargando={cargando} 
         error={errorCarga} 
+        abrirModalEdicion={abrirModalEdicion} // Método para abrir modal de edición
       />
 
       <ModalRegistroProducto
@@ -125,6 +162,13 @@ useEffect(() => {
         errorCarga={errorCarga}
         categorias={listaCategorias}
       />
+
+<ModalEliminacionProducto
+          mostrarModalEliminacion={mostrarModalEliminacion}
+          setMostrarModalEliminacion={setMostrarModalEliminacion}
+          eliminarProducto={eliminarProducto}
+        />
+
       
     </Container>
   );

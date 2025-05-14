@@ -1,3 +1,7 @@
+
+
+//ModalEliminacionCompra.jsx
+
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
@@ -23,4 +27,5 @@ const ModalEliminacionCompra = ({ mostrarModalEliminacion, setMostrarModalElimin
 };
 
 export default ModalEliminacionCompra;
+
 

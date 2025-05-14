@@ -1,22 +1,13 @@
-
 // Importaciones necesarias para el componente visual
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Paginacion from '../paginacion/Paginacion';
 
-// Declaración del componente TablaClientes que recibe props
-const TablaClientes = ({ clientes,
-  cargando, 
-  error,
-  totalElementos, 
-  elementosPorPagina,
-  paginaActual,
-  establecerPaginaActual }) => {
-
+// Declaración del componente TablaCategorias que recibe props
+const TablaClientes = ({ clientes, cargando, error }) => {
   // Renderizado condicional según el estado recibido por props
   if (cargando) {
-    return <div>Cargando clientes...</div>; // Muestra mensaje mientras carga
+    return <div>Cargando categorías...</div>; // Muestra mensaje mientras carga
   }
   if (error) {
     return <div>Error: {error}</div>;         // Muestra error si ocurre
@@ -27,27 +18,27 @@ const TablaClientes = ({ clientes,
     <Table striped bordered hover responsive>
       <thead>
         <tr>
-        <th>ID </th>
-          <th>Primer Nombre</th>
-          <th>Segundo Nombre</th>
-          <th>Primer Apellido</th>
-          <th>Segundo Apellido</th>
+          <th>ID Cliente</th>
+          <th>Primer nombre</th>
+          <th>Segundo nombre</th>
+          <th>primer apellido</th>
+          <th>segundo apellido</th>
           <th>Celular</th>
           <th>Direccion</th>
           <th>Cedula</th>
         </tr>
       </thead>
       <tbody>
-        {(clientes|| []).map((cliente) => (
+        {clientes.map((cliente) => (
           <tr key={cliente.id_cliente}>
             <td>{cliente.id_cliente}</td>
             <td>{cliente.primer_nombre}</td>
             <td>{cliente.segundo_nombre}</td>
-            <td>{cliente.primer_apellido}</td>
+            <td>{cliente. primer_apellido}</td>
             <td>{cliente.segundo_apellido}</td>
             <td>{cliente.celular}</td>
             <td>{cliente.direccion}</td>
-            <td>{cliente.cedula}</td>
+            <td>{cliente.cedula  }</td>
           </tr>
         ))}
       </tbody>

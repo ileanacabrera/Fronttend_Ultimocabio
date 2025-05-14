@@ -1,35 +1,33 @@
-
 // Importaciones necesarias para el componente visual
 import React from 'react';
 import { Table, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Paginacion from '../paginacion/Paginacion';
+import Paginacion from "../ordenamiento/Paginacion";
 
 // Declaración del componente TablaCategorias que recibe props
-const TablaCategorias = ({ categorias,
-   cargando, 
+const TablaCategorias = ({
+   categorias, 
+   cargando,
    error,
-   totalElementos, 
+   totalElementos,
    elementosPorPagina,
    paginaActual,
    establecerPaginaActual,
    abrirModalEliminacion,
    abrirModalEdicion
-  
-  }) => {
-    
+   }) => {
   // Renderizado condicional según el estado recibido por props
   if (cargando) {
     return <div>Cargando categorías...</div>; // Muestra mensaje mientras carga
   }
   if (error) {
-    return <div>Error: {error}</div>;         // Muestra error si ocurre
+    return <div>Error: {error}</div>;// Muestra error si ocurre
   }
 
-  
   // Renderizado de la tabla con los datos recibidos
   return (
-    <> <Table striped bordered hover responsive>
+    <>
+    <Table striped bordered hover responsive>
       <thead>
         <tr>
           <th>ID Categoría</th>
@@ -54,7 +52,7 @@ const TablaCategorias = ({ categorias,
                 >
                   <i className="bi bi-pencil"></i>
                 </Button>
-
+                
                 <Button
                   variant="outline-danger"
                   size="sm"
@@ -62,17 +60,25 @@ const TablaCategorias = ({ categorias,
                 >
                   <i className="bi bi-trash"></i>
                 </Button>
-
               </td>
+
           </tr>
+          
         ))}
+       
       </tbody>
-      
     </Table>
-     
+    
+<Paginacion
+  elementosPorPagina={elementosPorPagina}
+  totalElementos={totalElementos}
+  paginaActual={paginaActual}
+  establecerPaginaActual={establecerPaginaActual}
+/>
+
     </>
   );
 };
-    
+
 // Exportación del componente
 export default TablaCategorias;
