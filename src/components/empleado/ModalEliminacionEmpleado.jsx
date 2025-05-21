@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const ModalEliminacionEmpleado = ({
+const ModalEliminacionEmpleado= ({
   mostrarModalEliminacion,
   setMostrarModalEliminacion,
   eliminarEmpleado,

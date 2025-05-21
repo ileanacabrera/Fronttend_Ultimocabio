@@ -48,7 +48,7 @@ const Compras = () => {
 
   const obtenerEmpleados = async () => {
     try {
-      const respuesta = await fetch('http://localhost:3000/api/empleado');
+      const respuesta = await fetch('http://localhost:3000/api/empleados');
       if (!respuesta.ok) throw new Error('Error al cargar los empleados');
       const datos = await respuesta.json();
       setEmpleados(datos);

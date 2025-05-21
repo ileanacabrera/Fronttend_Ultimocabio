@@ -9,8 +9,12 @@ import Encabezado from "./components/encabezado/Encabezado";
 import Producto from "./views/productos";
 import Ventas from "./views/ventas";
 import Compras from "./views/Compras";
-import Empleado from "./views/Empleado";
+import Dashboard from "./views/Dashboard";
+
+import Estadisticas from "./views/Estadisticas";
+
 import Catalogo from "./views/CatalogoProductos"
+import Empleados from "./views/Empleados";
 
 
 const App = () => {
@@ -27,7 +31,9 @@ const App = () => {
           <Route path="/productos" element={<Producto/>} />
           <Route path="/categorias" element={<Categorias />} />
            <Route path="/Compras" element={<Compras />} />
-           <Route path="/empleado" element={<Empleado />} />
+           <Route path="/Estadisticas"element={<Estadisticas/>}/>
+            <Route path="/Empleados" element={<Empleados />} />
+             <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/ventas" element={<Ventas />} />
            <Route path="/CatalogoProductos" element={<Catalogo />} />
         </Routes>
